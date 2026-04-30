@@ -1,0 +1,6 @@
+{
+  "name": "hello-world",
+  "description": "Generador mínimo: módulo TypeScript que imprime un saludo",
+  "metadata": { "language": "ts", "framework": "none" },
+  "template": "templates"
+}
