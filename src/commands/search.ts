@@ -1,6 +1,6 @@
 import { Command } from "commander";
 import Table from "cli-table3";
-import { getDB } from "../lib/db";
+import { initDB, findPatterns } from "../lib/db";
 
 export function searchCommand() {
   const cmd = new Command("search");
@@ -8,10 +8,8 @@ export function searchCommand() {
     .description("Busca patterns disponibles")
     .argument("[query]", "Término a buscar")
     .action(async (query) => {
-      const db = getDB();
-      const rows = db
-        .prepare("SELECT id, name, description FROM patterns WHERE name LIKE ? LIMIT 50")
-        .all(`%${query || ""}%`);
+      await initDB();
+      const rows = await findPatterns(query || "");
 
       const table = new Table({ head: ["id", "name", "description"] });
       rows.forEach((r: any) => table.push([r.id, r.name, r.description]));

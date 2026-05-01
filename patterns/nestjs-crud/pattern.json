@@ -1,0 +1,15 @@
+{
+  "name": "nestjs-crud",
+  "description": "CRUD completo NestJS + Prisma con validaciones",
+  "metadata": {
+    "language": "typescript",
+    "framework": "nestjs",
+    "tags": ["crud", "prisma", "rest-api", "validation"]
+  },
+  "template": "templates",
+  "variables": [
+    { "name": "entity", "prompt": "Nombre de la entidad (PascalCase, ej: Product)", "required": true, "example": "Product" },
+    { "name": "entityLower", "computed": true, "description": "Nombre en minúscula (auto-generado)" },
+    { "name": "entityPlural", "prompt": "Nombre plural de la entidad", "required": true, "example": "products" }
+  ]
+}

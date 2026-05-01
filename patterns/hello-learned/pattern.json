@@ -1,0 +1,8 @@
+{
+  "name": "hello-learned",
+  "description": "Aprendido desde patterns/hello-world/templates",
+  "metadata": {
+    "learnedFrom": "patterns/hello-world/templates"
+  },
+  "template": "templates"
+}

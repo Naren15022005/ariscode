@@ -1,0 +1,13 @@
+{
+  "name": "react-component",
+  "description": "Componente React funcional con TypeScript y CSS Modules",
+  "metadata": {
+    "language": "typescript",
+    "framework": "react",
+    "tags": ["react", "typescript", "component"]
+  },
+  "template": "templates",
+  "variables": [
+    { "name": "ComponentName", "prompt": "Nombre del componente (PascalCase)", "required": true, "example": "UserCard" }
+  ]
+}

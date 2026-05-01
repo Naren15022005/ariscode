@@ -1,0 +1,21 @@
+import React from 'react';
+import styles from './{{ComponentName}}.module.css';
+
+interface {{ComponentName}}Props {
+  title?: string;
+  children?: React.ReactNode;
+}
+
+export const {{ComponentName}}: React.FC<{{ComponentName}}Props> = ({ 
+  title,
+  children 
+}) => {
+  return (
+    <div className={styles.container}>
+      {title && <h2 className={styles.title}>{title}</h2>}
+      <div className={styles.content}>
+        {children}
+      </div>
+    </div>
+  );
+};

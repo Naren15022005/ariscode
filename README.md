@@ -291,3 +291,43 @@ Forma parte del ecosistema **ARIS**:
 ⭐ Si te gusta la idea, dale star al repo y síguenos para no perderte el lanzamiento.
 
 </div>
+
+## CLI — Instrucciones rápidas
+
+La CLI de Aris Code permite generar proyectos a partir de patterns locales.
+
+- Guía completa: [instruccionesCLI.md](instruccionesCLI.md)
+
+Resumen rápido:
+
+- Requisitos: Node.js 18+ (recomendado), `pnpm` o `npm`.
+- Instalar dependencias (recomendado con Corepack + pnpm):
+
+```powershell
+corepack enable
+corepack prepare pnpm@latest --activate
+pnpm install
+```
+
+Si no usas `pnpm`:
+
+```powershell
+npm install
+```
+
+- Ejecutar en desarrollo (ejemplo):
+
+```powershell
+npm run dev -- create hello-world myapp
+# o con pnpm
+pnpm run dev -- create hello-world myapp
+```
+
+- Comandos principales: `create`, `search`, `error`.
+
+Para más detalles y troubleshooting, consulta [instruccionesCLI.md](instruccionesCLI.md).
+
+## Release v1.0.0
+
+La versión `v1.0.0` incluye: comando `create` con templates Handlebars, `search`, `error` con soluciones iniciales, patterns `hello-world`, `nestjs-crud` y `react-component`, tests y binarios empaquetados. Consulta [CHANGELOG.md](CHANGELOG.md) para más detalles.
+
