@@ -1,6 +1,5 @@
 import { Command } from "commander";
-import inquirer from "inquirer";
-import ora from "ora";
+import prompts from "prompts";
 import path from "path";
 import fs from "fs/promises";
 import { loadLocalPattern, renderTemplateDir } from "../lib/patterns";
@@ -12,25 +11,17 @@ export function createCommand() {
     .argument("[pattern]", "Nombre del pattern")
     .argument("[name]", "Nombre del módulo/proyecto")
     .action(async (patternArg, nameArg) => {
-      const answers = await inquirer.prompt([
-        {
-          type: "input",
-          name: "pattern",
-          message: "Pattern a usar",
-          when: () => !patternArg,
-        },
-        {
-          type: "input",
-          name: "name",
-          message: "Nombre del módulo/proyecto",
-          when: () => !nameArg,
-        },
-      ]);
+      const questions: any[] = [];
+      if (!patternArg) questions.push({ type: "text", name: "pattern", message: "Pattern a usar" });
+      if (!nameArg) questions.push({ type: "text", name: "name", message: "Nombre del módulo/proyecto", initial: "app" });
+
+      const answers = questions.length
+        ? await prompts(questions, { onCancel: () => { console.log("Cancelado"); process.exit(1); } })
+        : {};
 
       const chosenPattern = patternArg || answers.pattern;
       const name = nameArg || answers.name || "app";
-      const spinner = ora("Generando...").start();
-
+      console.log("Generando...");
       try {
         const pattern = await loadLocalPattern(chosenPattern);
         if (!pattern) throw new Error(`Pattern local '${chosenPattern}' no encontrado.`);
@@ -39,9 +30,9 @@ export function createCommand() {
         await fs.mkdir(outDir, { recursive: true });
         await renderTemplateDir(pattern.templateDir, outDir, { name, pattern: pattern.metadata });
 
-        spinner.succeed(`Pattern ${chosenPattern} aplicado en ${outDir}`);
+        console.log(`Pattern ${chosenPattern} aplicado en ${outDir}`);
       } catch (err: any) {
-        spinner.fail("Fallo al generar");
+        console.error("Fallo al generar");
         console.error(err.message || err);
       }
     });

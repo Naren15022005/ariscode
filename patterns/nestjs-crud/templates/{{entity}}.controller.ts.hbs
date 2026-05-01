@@ -1,0 +1,46 @@
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  HttpCode,
+  HttpStatus,
+} from '@nestjs/common';
+import { {{entity}}Service } from './{{entity}}.service';
+import { Create{{entity}}Dto } from './dto/create-{{entity}}.dto';
+import { Update{{entity}}Dto } from './dto/update-{{entity}}.dto';
+
+@Controller('{{entityPlural}}')
+export class {{entity}}Controller {
+  constructor(private readonly {{entityLower}}Service: {{entity}}Service) {}
+
+  @Post()
+  @HttpCode(HttpStatus.CREATED)
+  create(@Body() create{{entity}}Dto: Create{{entity}}Dto) {
+    return this.{{entityLower}}Service.create(create{{entity}}Dto);
+  }
+
+  @Get()
+  findAll() {
+    return this.{{entityLower}}Service.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.{{entityLower}}Service.findOne(+id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() update{{entity}}Dto: Update{{entity}}Dto) {
+    return this.{{entityLower}}Service.update(+id, update{{entity}}Dto);
+  }
+
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  remove(@Param('id') id: string) {
+    return this.{{entityLower}}Service.remove(+id);
+  }
+}

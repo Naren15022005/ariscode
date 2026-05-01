@@ -1,0 +1,33 @@
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+import { Create{{entity}}Dto } from './dto/create-{{entity}}.dto';
+import { Update{{entity}}Dto } from './dto/update-{{entity}}.dto';
+
+@Injectable()
+export class {{entity}}Service {
+  constructor(private prisma: PrismaService) {}
+
+  async create(create{{entity}}Dto: Create{{entity}}Dto) {
+    return this.prisma.{{entityLower}}.create({ data: create{{entity}}Dto });
+  }
+
+  async findAll() {
+    return this.prisma.{{entityLower}}.findMany();
+  }
+
+  async findOne(id: number) {
+    const {{entityLower}} = await this.prisma.{{entityLower}}.findUnique({ where: { id } });
+    if (!{{entityLower}}) throw new NotFoundException(`{{entity}} #${id} not found`);
+    return {{entityLower}};
+  }
+
+  async update(id: number, update{{entity}}Dto: Update{{entity}}Dto) {
+    await this.findOne(id);
+    return this.prisma.{{entityLower}}.update({ where: { id }, data: update{{entity}}Dto });
+  }
+
+  async remove(id: number) {
+    await this.findOne(id);
+    return this.prisma.{{entityLower}}.delete({ where: { id } });
+  }
+}
