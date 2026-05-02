@@ -73,12 +73,12 @@ Duration: 4.95s
 ### Windows
 - **File:** `index-win.exe`
 - **Size:** 64 MB
-- **SHA256:** `f8381695e18c9bd0e06577ba8d47ba1a36c4613b6214824fb3a089b9cf7b937f`
+- **SHA256:** `19918608ef6e02476e3ccafd81c804261f8dce799e8d616c780e4235ebcbdadd`
 
 ### Linux
 - **File:** `index-linux`
 - **Size:** 72 MB
-- **SHA256:** `1fdbd370b43f7f6d61a15f1ba7a7ecfc17923e7b35a15bf35853c724da5d7325`
+- **SHA256:** `e8f45a08aee81b45ff131ff3d8ff9002880dc31a155cc9b8ce33bcb1bc714728`
 
 ## 📝 Technical Changes
 
