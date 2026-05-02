@@ -2,8 +2,6 @@ import path from "path";
 import fs from "fs/promises";
 import Handlebars from "handlebars";
 
-<<<<<<< HEAD
-=======
 // Registrar helpers globales de Handlebars
 Handlebars.registerHelper("pascalCase", (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -24,26 +22,19 @@ Handlebars.registerHelper("camelCase", (str: string) => {
 Handlebars.registerHelper("uppercase", (str: string) => str.toUpperCase());
 Handlebars.registerHelper("lowercase", (str: string) => str.toLowerCase());
 
->>>>>>> add-local-run-scripts
 export interface PatternMeta {
   name: string;
   description?: string;
   metadata?: Record<string, any>;
   template?: string;
-<<<<<<< HEAD
-=======
   variables?: Record<string, any>[];
->>>>>>> add-local-run-scripts
 }
 
 export interface Pattern {
   name: string;
   description?: string;
   metadata?: Record<string, any>;
-<<<<<<< HEAD
-=======
   variables?: Record<string, any>[];
->>>>>>> add-local-run-scripts
   templateDir: string;
 }
 
@@ -58,10 +49,7 @@ export async function loadLocalPattern(name: string): Promise<Pattern | null> {
       name: meta.name || name,
       description: meta.description,
       metadata: meta.metadata || {},
-<<<<<<< HEAD
-=======
       variables: meta.variables || [],
->>>>>>> add-local-run-scripts
       templateDir,
     };
   } catch (err) {
@@ -69,14 +57,6 @@ export async function loadLocalPattern(name: string): Promise<Pattern | null> {
   }
 }
 
-<<<<<<< HEAD
-export async function renderTemplateDir(srcDir: string, destDir: string, context: Record<string, any>) {
-  const entries = await fs.readdir(srcDir, { withFileTypes: true });
-  for (const entry of entries) {
-    const srcPath = path.join(srcDir, entry.name);
-    let destName = entry.name;
-    if (destName.startsWith("_")) destName = "." + destName.slice(1);
-=======
 export async function renderTemplateDir(
   srcDir: string,
   destDir: string,
@@ -98,31 +78,22 @@ export async function renderTemplateDir(
     destName = nameTemplate(context);
 
     // 3. Remover extensión .hbs
->>>>>>> add-local-run-scripts
     const destPath = path.join(destDir, destName.replace(/\.hbs$/, ""));
 
     if (entry.isDirectory()) {
       await fs.mkdir(destPath, { recursive: true });
       await renderTemplateDir(srcPath, destPath, context);
     } else {
-<<<<<<< HEAD
-      const content = await fs.readFile(srcPath, "utf-8");
-      const template = Handlebars.compile(content);
-      const rendered = template(context);
-=======
       // 4. Compilar el contenido del archivo
       const content = await fs.readFile(srcPath, "utf-8");
       const template = Handlebars.compile(content);
       const rendered = template(context);
 
->>>>>>> add-local-run-scripts
       await fs.mkdir(path.dirname(destPath), { recursive: true });
       await fs.writeFile(destPath, rendered, "utf-8");
     }
   }
 }
-<<<<<<< HEAD
-=======
 
 export async function syncPatternsFromDisk(patternsDir: string = "patterns") {
   const entries = await fs.readdir(patternsDir, { withFileTypes: true });
@@ -149,4 +120,3 @@ export async function syncPatternsFromDisk(patternsDir: string = "patterns") {
   console.log(`✅ Sincronizados ${synced.length} patterns: ${synced.join(", ")}`);
   return synced;
 }
->>>>>>> add-local-run-scripts
