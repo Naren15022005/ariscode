@@ -7,6 +7,10 @@ import { learnCommand } from "./learn";
 import { updateCommand } from "./update";
 import { statusCommand } from "./status";
 import { compareCommand } from "./compare";
+<<<<<<< HEAD
+=======
+import { syncCommand } from "./sync";
+>>>>>>> add-local-run-scripts
 
 export function devCommand() {
   const dev = new Command("dev");
@@ -20,6 +24,10 @@ export function devCommand() {
   dev.addCommand(updateCommand());
   dev.addCommand(statusCommand());
   dev.addCommand(compareCommand());
+<<<<<<< HEAD
+=======
+  dev.addCommand(syncCommand());
+>>>>>>> add-local-run-scripts
 
   return dev;
 }
