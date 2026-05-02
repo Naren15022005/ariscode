@@ -1,17 +1,198 @@
 <div align="center">
 
-# ⚡ Aris Code
+# ⚡ ArisCode CLI
 
-### *Code at the speed of thought*
+**Generador de código profesional. Instala, usa, genera.**
 
-**El copiloto de programación que no necesita IA cara.**
-
+[![npm version](https://img.shields.io/npm/v/ariscode-cli.svg)](https://www.npmjs.com/package/ariscode-cli)
+[![npm downloads](https://img.shields.io/npm/dm/ariscode-cli.svg)](https://www.npmjs.com/package/ariscode-cli)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Status](https://img.shields.io/badge/status-in_development-orange.svg)]()
-[![Made in Colombia](https://img.shields.io/badge/Made_in-Colombia_🇨🇴-yellow.svg)]()
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]()
+[![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen.svg)]()
 
-[Filosofía](#-filosofía) • [Qué es](#-qué-es-aris-code) • [Cómo funciona](#-cómo-funciona) • [Roadmap](#-roadmap) • [Contribuir](#-contribuir)
+[Instalación](#-instalación) • [Uso](#-uso-rápido) • [Patterns](#-patterns-disponibles) • [Documentación](#-documentación) • [Contribuir](#-contribuir)
+
+</div>
+
+---
+
+## 🚀 Instalación
+
+```bash
+npm install -g ariscode-cli
+```
+
+¡Eso es! Ya está listo.
+
+## ⚡ Uso Rápido
+
+```bash
+# Crear componente React
+aris dev create react-component MyButton
+
+# Crear módulo CRUD NestJS
+aris dev create nestjs-crud User
+
+# Sincronizar patterns
+aris dev sync
+
+# Buscar patterns disponibles
+aris dev search
+
+# Buscar soluciones a errores
+aris dev error "Cannot find module"
+```
+
+## 📦 Patterns Disponibles
+
+### React Component
+Genera un componente React funcional con TypeScript y CSS Modules.
+
+```bash
+aris dev create react-component UserCard
+
+# Resultado:
+# UserCard/
+# ├── UserCard.tsx
+# └── UserCard.module.css
+```
+
+### NestJS CRUD
+Genera un módulo completo CRUD con validaciones.
+
+```bash
+aris dev create nestjs-crud Product
+
+# Resultado:
+# Product/
+# ├── Product.controller.ts
+# ├── Product.service.ts
+# ├── Product.module.ts
+# ├── entities/Product.entity.ts
+# └── dto/
+#     ├── create-Product.dto.ts
+#     └── update-Product.dto.ts
+```
+
+### Hello World
+Template básico de bienvenida.
+
+```bash
+aris dev create hello-world myapp
+```
+
+## 📚 Documentación
+
+- [CLI Completa](./instruccionesCLI.md) - Todos los comandos
+- [CHANGELOG](./CHANGELOG.md) - Versiones y cambios
+- [Escribir Patterns](./patterns/README.md) - Crear tus propios patterns
+
+## 🎯 Características
+
+✅ **Rápido** - Genera código en <500ms  
+✅ **Determinístico** - Mismo input = Mismo output  
+✅ **Offline** - Funciona sin internet  
+✅ **Personalizable** - Crea tus propios patterns  
+✅ **Open Source** - MIT license  
+
+## 📝 Handlebars Helpers
+
+Usa estas transformaciones en tus patterns:
+
+```handlebars
+{{pascalCase name}}   → MyComponent
+{{kebabCase name}}    → my-component
+{{snakeCase name}}    → my_component
+{{camelCase name}}    → myComponent
+{{uppercase name}}    → MYCOMPONENT
+{{lowercase name}}    → mycomponent
+```
+
+## 🤝 Contribuir
+
+¿Encontraste un bug? ¿Tienes una idea?
+
+- [Reportar bug](https://github.com/Naren15022005/ariscode/issues)
+- [Solicitar feature](https://github.com/Naren15022005/ariscode/discussions)
+- [Pull requests](https://github.com/Naren15022005/ariscode/pulls)
+
+## 📋 Requisitos
+
+- Node.js ≥ 18
+- npm ≥ 9 (o pnpm/yarn)
+
+## 💡 Ejemplos
+
+### Ejemplo: Generar API completa
+
+```bash
+# Crear proyecto
+mkdir mi-api && cd mi-api
+
+# Generar endpoints CRUD
+aris dev create nestjs-crud User
+aris dev create nestjs-crud Product
+aris dev create nestjs-crud Order
+
+# Resultado: Un API REST listo para usar
+```
+
+### Ejemplo: Componentes React reutilizables
+
+```bash
+# Crear librería de componentes
+mkdir mi-libreria && cd mi-libreria
+
+# Generar componentes
+aris dev create react-component Button
+aris dev create react-component Card
+aris dev create react-component Modal
+
+# Resultado: Componentes TypeScript + CSS Modules listos
+```
+
+## 🔧 Configuración
+
+ArisCode busca patterns en:
+
+1. **Carpeta local** - `./patterns` (si existe en tu proyecto)
+2. **npm global** - Patterns incluidos en la instalación
+3. **Directorio actual** - `./patterns`
+
+Para usar patterns personalizados, crea una carpeta `patterns/` en tu proyecto.
+
+## 📊 Estadísticas
+
+- ✅ 20+ tests pasando
+- ✅ 4 patterns incluidos
+- ✅ <500ms por generación
+- ✅ 0 dependencias opcionales para CLI
+
+## 🐛 Troubleshooting
+
+### "Pattern not found"
+```bash
+# Verificar patterns disponibles
+aris dev search
+
+# Sincronizar patterns
+aris dev sync
+```
+
+### "Cannot find module"
+```bash
+# Reinstalar globalmente
+npm install -g ariscode-cli@latest
+```
+
+## 📜 Licencia
+
+MIT © 2026 Naren15022005
+
+---
+
+<div align="center">
+
+**[⭐ Marca esto con star en GitHub](https://github.com/Naren15022005/ariscode)**
 
 </div>
 

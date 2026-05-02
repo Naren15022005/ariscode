@@ -1,5 +1,6 @@
 import path from "path";
 import fs from "fs/promises";
+import fsSync from "fs";
 import Handlebars from "handlebars";
 
 // Registrar helpers globales de Handlebars
@@ -22,6 +23,35 @@ Handlebars.registerHelper("camelCase", (str: string) => {
 Handlebars.registerHelper("uppercase", (str: string) => str.toUpperCase());
 Handlebars.registerHelper("lowercase", (str: string) => str.toLowerCase());
 
+/**
+ * Obtiene la ruta a la carpeta patterns
+ * Funciona tanto en desarrollo como en instalación npm global
+ */
+function getPackageRoot(): string {
+  // 1. Desarrollo local (cuando estás trabajando en el código)
+  const devPath = path.join(__dirname, '..', '..', 'patterns');
+  if (fsSync.existsSync(devPath)) {
+    return devPath;
+  }
+
+  // 2. Instalación npm local (node_modules del proyecto)
+  const localNpmPath = path.join(__dirname, '..', 'patterns');
+  if (fsSync.existsSync(localNpmPath)) {
+    return localNpmPath;
+  }
+
+  // 3. Instalación npm global
+  // En Windows: C:\Users\Usuario\AppData\Roaming\npm\node_modules\ariscode-cli\patterns
+  // En Mac/Linux: /usr/local/lib/node_modules/ariscode-cli/patterns
+  const globalNpmPath = path.join(__dirname, 'patterns');
+  if (fsSync.existsSync(globalNpmPath)) {
+    return globalNpmPath;
+  }
+
+  // 4. Fallback: directorio actual
+  return path.join(process.cwd(), 'patterns');
+}
+
 export interface PatternMeta {
   name: string;
   description?: string;
@@ -39,12 +69,14 @@ export interface Pattern {
 }
 
 export async function loadLocalPattern(name: string): Promise<Pattern | null> {
-  const root = path.join(process.cwd(), "patterns", name);
+  const patternsDir = getPackageRoot();
+  const patternPath = path.join(patternsDir, name);
+
   try {
-    const metaPath = path.join(root, "pattern.json");
-    const raw = await fs.readFile(metaPath, "utf-8");
+    const patternJsonPath = path.join(patternPath, "pattern.json");
+    const raw = await fs.readFile(patternJsonPath, "utf-8");
     const meta: PatternMeta = JSON.parse(raw);
-    const templateDir = path.join(root, meta.template || "templates");
+    const templateDir = path.join(patternPath, meta.template || "templates");
     return {
       name: meta.name || name,
       description: meta.description,
@@ -95,14 +127,15 @@ export async function renderTemplateDir(
   }
 }
 
-export async function syncPatternsFromDisk(patternsDir: string = "patterns") {
-  const entries = await fs.readdir(patternsDir, { withFileTypes: true });
+export async function syncPatternsFromDisk(patternsDir?: string) {
+  const dir = patternsDir || getPackageRoot();
+  const entries = await fs.readdir(dir, { withFileTypes: true });
   const synced: string[] = [];
 
   for (const entry of entries) {
     if (!entry.isDirectory() || entry.name === "README.md") continue;
 
-    const patternJsonPath = path.join(patternsDir, entry.name, "pattern.json");
+    const patternJsonPath = path.join(dir, entry.name, "pattern.json");
 
     try {
       const exists = await fs.access(patternJsonPath).then(() => true).catch(() => false);

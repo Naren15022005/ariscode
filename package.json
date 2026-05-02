@@ -1,17 +1,25 @@
 {
   "name": "ariscode-cli",
   "version": "1.1.0",
-  "description": "CLI de Aris Code (scaffold)",
+  "description": "CLI generador de código con plantillas predefinidas para React, NestJS y más",
   "main": "dist/index.js",
   "bin": {
     "aris": "dist/index.js"
   },
+  "files": [
+    "dist/",
+    "patterns/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "dev": "ts-node src/index.ts",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/index.js",
     "clean": "rimraf dist",
     "prepare": "npm run build",
+    "prepublishOnly": "npm run build && npm test",
     "test": "vitest --run",
     "test:watch": "vitest",
     "test:create": "vitest run tests/create.test.ts",
@@ -20,9 +28,32 @@
     "release:gh": "bash scripts/create_release.sh",
     "release:gh-windows": "powershell -ExecutionPolicy Bypass -File scripts/create_release.ps1"
   },
-  "keywords": ["aris","cli","code"],
-  "author": "Alfonsito",
+  "keywords": [
+    "cli",
+    "generator",
+    "code-generator",
+    "templates",
+    "scaffolding",
+    "react",
+    "nestjs",
+    "boilerplate",
+    "typescript",
+    "handlebars"
+  ],
+  "author": "Naren15022005 <naren15022005@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Naren15022005/ariscode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Naren15022005/ariscode/issues"
+  },
+  "homepage": "https://github.com/Naren15022005/ariscode#readme",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "dependencies": {
     
     "cli-table3": "^0.6.0",
