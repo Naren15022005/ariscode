@@ -7,6 +7,7 @@ import { learnCommand } from "./learn";
 import { updateCommand } from "./update";
 import { statusCommand } from "./status";
 import { compareCommand } from "./compare";
+import { syncCommand } from "./sync";
 
 export function devCommand() {
   const dev = new Command("dev");
@@ -20,6 +21,7 @@ export function devCommand() {
   dev.addCommand(updateCommand());
   dev.addCommand(statusCommand());
   dev.addCommand(compareCommand());
+  dev.addCommand(syncCommand());
 
   return dev;
 }
