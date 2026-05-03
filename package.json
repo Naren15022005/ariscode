@@ -1,7 +1,7 @@
 {
   "name": "ariscode-cli",
-  "version": "1.1.0",
-  "description": "CLI generador de código con plantillas predefinidas para React, NestJS y más",
+  "version": "2.0.0",
+  "description": "CLI generador de proyectos y componentes con plantillas predefinidas para React, NestJS y más",
   "main": "dist/index.js",
   "bin": {
     "aris": "dist/index.js"
@@ -9,6 +9,7 @@
   "files": [
     "dist/",
     "patterns/",
+    "templates/",
     "README.md",
     "LICENSE",
     "CHANGELOG.md"
@@ -55,12 +56,15 @@
     "npm": ">=9.0.0"
   },
   "dependencies": {
-    
     "cli-table3": "^0.6.0",
     "commander": "^10.0.0",
     "handlebars": "^4.7.7",
     "prompts": "^2.4.2",
-    "ts-morph": "^17.0.1"
+    "ts-morph": "^17.0.1",
+    "chalk": "^4.1.2",
+    "ora": "^5.4.1",
+    "axios": "^1.6.0",
+    "tar": "^6.2.0"
   },
   "optionalDependencies": {
     "better-sqlite3": "^8.2.0"
@@ -70,6 +74,8 @@
     "ts-node": "^10.9.1",
     "@types/node": "^18.0.0",
     "@types/commander": "^2.12.2",
+    "@types/tar": "^6.1.0",
+    "@types/prompts": "^2.4.9",
     "rimraf": "^5.0.0",
     "pnpm": "^8.0.0",
     "vitest": "^1.3.0",

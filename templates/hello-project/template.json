@@ -1,0 +1,28 @@
+{
+  "name": "hello-project",
+  "displayName": "Hello Project",
+  "description": "Simple project template",
+  "category": "starter",
+  "prompts": [
+    {
+      "type": "input",
+      "name": "projectName",
+      "message": "Project name",
+      "initial": "my-project"
+    }
+  ],
+  "files": [
+    {
+      "source": ".",
+      "destination": ".",
+      "type": "directory"
+    }
+  ],
+  "scripts": [],
+  "postInstall": [
+    {
+      "type": "message",
+      "content": "Project {{projectName}} created successfully!"
+    }
+  ]
+}
